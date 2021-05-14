@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/04/30 14:29:31 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 14:27:42 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    scan_av(int ac, char **av)
     }
 }
 
-void    ft_init_arg(int ac, char **av) 
+t_struct      *ft_init_arg(int ac, char **av) 
 {
     int nb_philo;
     int i;
@@ -34,12 +34,11 @@ void    ft_init_arg(int ac, char **av)
     scan_av(ac, av);
     nb_philo = ft_atoi(av[1]);
    
-    t_arg      *philo;
+    t_struct      *philo;
     t_mor      *more;
 
     more = malloc(sizeof(t_mor));
-    more->fork = 69;
-    philo = malloc(sizeof(t_arg) * nb_philo);
+    philo = malloc(sizeof(t_struct) * nb_philo);
    
     while (i < nb_philo)
     {
@@ -51,22 +50,50 @@ void    ft_init_arg(int ac, char **av)
             philo[i].nb_eat = ft_atoi(av[5]);
         else
             philo[i].nb_eat = -1;
-        
         philo[i].id = i + 1;
         philo[i].more = more;
-        printf("salut je suis le philo %d\n", philo[i].id);
-        printf("ma fork = %d\n", philo[i].more->fork);
+       //printf("salut je suis le philo %d\n", philo[i].id);
+       //printf("ma fork = %d\n", philo[i].more->fork);
         i++;
     }
+    ft_init_2(philo);
+    return (philo);
+}
+
+int ft_init_2(t_struct *p)
+{
+    //init tableau de mutex
+    p->more->mutex_fork = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t) * p->nb_philo + 1);
+    pthread_mutex_init(p->more->mutex_fork, NULL);
+
+    //init booleene fork
+    p->more->fork = (int *)malloc(sizeof(int) * p->nb_philo + 1);
+    p->more->size_fork = p->nb_philo + 1;
+    for(int i = 0; i < p->more->size_fork; i++)
+    {
+        p->more->fork[i] = 0;
+        //dprintf(1, "je suis fork %d avec pour valeur %d\n", i, p->more->fork[i]);
+    }
+    //dprintf(1, "%d %d\n", p->more->fork[2], p->more->size_fork);
+    return 1;
+
 }
 
 int main(int ac, char **av)
 {
+    t_struct        *p;
     if (ac <= 1 || ac > 6)
-        error(1, "Bad arguments ac\n");
-    ft_init_arg(ac, av);
+        error(1, "Bad arguments a\n");
+    p = ft_init_arg(ac, av);
     if (ac == 5)
+    {
+        ft_create_thread(p);
         printf("ok \n");
+        
+    }
     else
+    {
+        ft_create_thread(p);
         printf("dac\n");
+    }
 }

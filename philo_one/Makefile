@@ -1,6 +1,6 @@
 HEADER =	philo_one.h
 
-SRCS =	srcs/libft.c srcs/utils.c
+SRCS =	srcs/libft.c srcs/utils.c srcs/threads.c srcs/ft_eat.c
 
 NAME	=	philo_one
 
@@ -10,7 +10,7 @@ FLAGS	=	-Wall -Wextra -Werror
 
 OBJS	=	${SRCS:.c=.o}
 
-.PHONY: all clean fclean re
+.PHONY: clean fclean re
 
 %.o: %.c 
 	gcc $(FLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:42 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/04/30 13:59:49 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/05/14 13:53:07 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 
 typedef	struct s_mor
 {
-	int fork;
+	int *fork;
+	int size_fork;
+	pthread_mutex_t *mutex_fork;
 }				t_mor;
 
-typedef struct s_arg
+typedef struct s_struct
 {
 	int	id;
 	int nb_philo;
@@ -33,10 +35,13 @@ typedef struct s_arg
     int t_sleep;
     int nb_eat;
 	t_mor	*more;
-}				t_arg;
+}				t_struct;
 
 long	ft_atoi(const char *str);
 void   	error(int ret, char *str);
 int		ft_strlen(char *str);
+int     ft_create_thread(t_struct *philo);
+int ft_init_2(t_struct *p);
+void	ft_eat(t_struct *p);
 
 #endif
