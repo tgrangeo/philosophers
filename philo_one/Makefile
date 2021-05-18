@@ -1,6 +1,6 @@
 HEADER =	philo_one.h
 
-SRCS =	srcs/libft.c srcs/utils.c srcs/threads.c srcs/ft_eat.c
+SRCS =	srcs/libft.c srcs/utils.c srcs/threads.c srcs/ft_eat.c srcs/message.c
 
 NAME	=	philo_one
 
