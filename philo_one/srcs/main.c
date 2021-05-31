@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/05/18 13:31:12 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/05/19 10:50:23 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,8 @@ t_struct      *ft_init_arg(int ac, char **av)
         philo[i].id = i + 1;
         philo[i].more = more;
         i++;
-        dprintf(1, "%d\n", i);
     }
     ft_init_2(philo);
-    exit(0);
     return (philo);
 }
 
@@ -65,9 +63,11 @@ int ft_init_2(t_struct *p)
     ////init tableau de mutex
     //p->more->mutex_fork = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t) * p->nb_philo + 1);
     //pthread_mutex_init(p->more->mutex_fork, NULL);
+
+	
     ////init mutex parole
-    //p->more->mutex_parole = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-    //pthread_mutex_init(p->more->mutex_parole, NULL);
+    p->more->mutex_parole = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+    pthread_mutex_init(p->more->mutex_parole, NULL);
 
     int i = 0;
 
@@ -85,13 +85,24 @@ int ft_init_2(t_struct *p)
     }
     p[p->nb_philo - 1].m_next_fork = p[0].m_fork;
 
-
     //init booleene fork
-    p->more->fork = (int *)malloc(sizeof(int) * p->nb_philo);
-    p->more->size_fork = p->nb_philo;
-    for(int i = 0; i < p->more->size_fork; i++)
-        p->more->fork[i] = 0;
-    return 1;
+	int y = 0;
+	while (y < p->nb_philo - 1)
+	{
+		p[y].fork = 0;
+		p[y].next_fork = &p[y + 1].fork;
+		//dprintf(1, "%d fork %d		 next fork %d\n", y , p[y].fork, *p[y].next_fork);
+		y++;
+	}
+	p[p->nb_philo - 1].fork = 0;
+	p[p->nb_philo - 1].next_fork = &p[0].fork;
+	//dprintf(1, "%d fork %d		 next fork %d\n", y , p[3].fork, *p[3].next_fork);
+	
+    // p->more->fork = (int *)malloc(sizeof(int) * p->nb_philo);
+    // p->more->size_fork = p->nb_philo;
+    // for(int i = 0; i < p->more->size_fork; i++)
+    //     p->more->fork[i] = 0;
+	 return 1;
 
 }
 

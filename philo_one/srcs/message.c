@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   message.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 10:19:23 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/05/18 13:24:12 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 21:48:49 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void    ft_message(int type, t_struct *p)
 {
-    //pthread_mutex_lock(p->more->mutex_parole);
+    pthread_mutex_lock(p->more->mutex_parole);
     gettimeofday(&p->more->now, NULL);
-      //dprintf(1, "%ld\n", p->more->now.tv_sec);
     printf("%ld ",ft_conv_to_ms( p->more->now,p->more->begin));
     printf("philo %d ", p->id);
     if (type == TYPE_EAT)
@@ -29,5 +28,5 @@ void    ft_message(int type, t_struct *p)
         printf("is thinking\n");
     else if (type == TYPE_DIE)
         printf("is dead\n");
-    //pthread_mutex_unlock(p->more->mutex_parole);
+    pthread_mutex_unlock(p->more->mutex_parole);
 }

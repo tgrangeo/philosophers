@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 11:28:16 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/05/18 13:23:32 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 22:20:18 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ void    *ft_routine(void *p_data)
 {
     t_struct *p = p_data;
 
-    //ft_eat(p);
+    ft_eat(p);
     ft_sleep(p);
+	ft_message(TYPE_THINK, p);
+	ft_die(p);
     return 0;
 }
 

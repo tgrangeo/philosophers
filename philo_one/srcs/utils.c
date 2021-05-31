@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/05/18 11:36:40 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/05/21 22:21:20 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,20 @@ long    ft_conv_to_ms(struct timeval philo_time, struct timeval start_time)
 
     sec = philo_time.tv_sec - start_time.tv_sec;
     micro = philo_time.tv_usec - start_time.tv_usec;
-    //dprintf(1, "s= %ld - %ld \n", philo_time.tv_sec, start_time.tv_sec);
     mili = micro * 0.001 + sec * 1000;
-    //dprintf(1, "%ld %ld %ld\n", sec, micro, mili);
     return (mili);
+}
+
+void	ft_die(t_struct *p)
+{
+	long time;
+
+	gettimeofday(&p->more->now, NULL);
+	time =	ft_conv_to_ms(p->more->now, p->more->begin) + ft_conv_to_ms(p->last_eat, p->more->begin);
+	if (time > p->t_die)
+	{
+		ft_message(TYPE_DIE, p);
+		//TODO:free les mallocs et tout la 
+		exit(0);	
+	}
 }
