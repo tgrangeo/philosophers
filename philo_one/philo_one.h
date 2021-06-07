@@ -6,7 +6,7 @@
 /*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:42 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/05/21 22:20:54 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 17:54:42 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ long	ft_atoi(const char *str);
 void   	error(int ret, char *str);
 int		ft_strlen(char *str);
 int     ft_create_thread(t_struct *philo);
-int		ft_init_2(t_struct *p);
 void	ft_eat(t_struct *p);
 void    ft_message(int type, t_struct *p);
 void    ft_sleep(t_struct *p);
 long    ft_conv_to_ms(struct timeval philo_time, struct timeval start_time);
 void	ft_die(t_struct *p);
+int		check_arg(int ac, char **av);
 
 #endif

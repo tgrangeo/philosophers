@@ -6,19 +6,22 @@ NAME	=	philo_one
 
 RM		=	rm -f
 
-FLAGS	=	-Wall -Wextra -Werror
+FLAGS	=	-Wall -Wextra -Werror -ggdb
 
 OBJS	=	${SRCS:.c=.o}
+
+# TODO zerzerazer
+COMP = clang # or gcc
 
 .PHONY: clean fclean re
 
 %.o: %.c 
-	gcc $(FLAGS) -c $< -o $@
+	$(COMP) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc $(FLAGS) -o $(NAME) srcs/main.c $(OBJS)
+	$(COMP) $(FLAGS) -o $(NAME) srcs/main.c $(OBJS)
 
 clean:
 	$(RM) $(OBJS)

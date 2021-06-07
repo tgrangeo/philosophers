@@ -6,7 +6,7 @@
 /*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/05/21 22:21:20 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/07 17:40:58 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,28 @@ long    ft_conv_to_ms(struct timeval philo_time, struct timeval start_time)
     mili = micro * 0.001 + sec * 1000;
     return (mili);
 }
+int	check_arg(int ac, char **av)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	j = 0;
+	if (ac < 5 || ac > 6)
+		return (1);
+	while (i < ac)
+	{
+		while (av[i][j])
+		{
+			if (av[i][j] < '0' || av[i][j] > '9')
+				return (1);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (0);
+}
 
 void	ft_die(t_struct *p)
 {
@@ -43,3 +65,4 @@ void	ft_die(t_struct *p)
 		exit(0);	
 	}
 }
+		
