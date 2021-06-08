@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_eat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 13:40:34 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/08 13:31:15 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 21:20:10 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int	wait_fork(t_struct *p)
 {
+	if (p->nb_philo == 1)
+		return (1);
 	while (!(p->fork == 0) && !(*p->next_fork == 0))
 	{
 		usleep(10);
@@ -29,11 +31,10 @@ void    ft_eat(t_struct *p)
 	usleep(10);
 	while (1)
 	{
-
-		//dprintf(1, "			%d ->  %ld //// %d\n", p->id, ft_conv_to_ms(p->more->now, p->more->begin) + ft_conv_to_ms(p->last_eat, p->more->begin), p->t_die);
 		if (wait_fork(p))
 		{
-		
+			if (p->nb_philo == 1)
+				ft_die(p);
 			//PREND ET VERROUILLE CES FOURCHETTES
     		pthread_mutex_lock(p->m_fork);
     		p->fork = 1;

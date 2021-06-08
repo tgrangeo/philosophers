@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/08 13:36:54 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 21:43:11 by thomasgrang      ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ t_struct      *ft_init_arg(char **av)
         i++;
     }
     ft_init_2(philo);
+	if (philo[i - 1].t_die < 11 || philo[i - 1].t_eat < 11 ||
+		philo[i - 1].t_sleep < 11)
+		error(1, "wrong arguments\n");
     return (philo);
 }
 
