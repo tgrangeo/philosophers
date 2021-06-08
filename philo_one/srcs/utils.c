@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
+/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/07 17:40:58 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 13:31:28 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ void	ft_die(t_struct *p)
 	long time;
 
 	gettimeofday(&p->more->now, NULL);
-	time =	ft_conv_to_ms(p->more->now, p->more->begin) + ft_conv_to_ms(p->last_eat, p->more->begin);
+	time = ft_conv_to_ms(p->more->now, p->last_eat);
+	//dprintf(1,"					%d     %d < %ld\n",p->id,  p->t_die, time);
 	if (time > p->t_die)
 	{
+		
 		ft_message(TYPE_DIE, p);
 		//TODO:free les mallocs et tout la 
-		exit(0);	
+		exit(1);	
 	}
 }
 		

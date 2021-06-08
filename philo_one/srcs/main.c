@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
+/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/07 17:56:44 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/08 13:36:54 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_struct      *ft_init_arg(char **av)
 
     i = 0;
     nb_philo = ft_atoi(av[1]);
-	if (nb_philo == 1 || nb_philo == 0)
+	if (nb_philo == 0)
 		error(1, "not enough philo\n");
     more = malloc(sizeof(t_mor));
     philo = malloc(sizeof(t_struct) * nb_philo);   
