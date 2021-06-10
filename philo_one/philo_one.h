@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
+/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:42 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/07 17:54:42 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 10:58:35 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef	struct s_mor
 {
 	int *fork;
 	int size_fork;
+	int	repas;
 	pthread_mutex_t *mutex_parole;
 	struct timeval begin;
 	struct timeval now;
@@ -63,5 +64,6 @@ void    ft_sleep(t_struct *p);
 long    ft_conv_to_ms(struct timeval philo_time, struct timeval start_time);
 void	ft_die(t_struct *p);
 int		check_arg(int ac, char **av);
+void	my_sleep(t_struct *p, int time);
 
 #endif

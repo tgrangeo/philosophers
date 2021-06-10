@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
+/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/08 21:35:15 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 10:45:05 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,23 @@ int	check_arg(int ac, char **av)
 	return (0);
 }
 
+void	my_sleep(t_struct *p, int time)
+{
+
+    struct timeval    now;
+    struct timeval    start;
+
+    gettimeofday(&start, NULL);
+    while (1)
+    {
+        usleep(50);
+        gettimeofday(&now, NULL);
+         ft_die(p);
+        if (ft_conv_to_ms(now, start) >= time)
+            break ;
+    }
+}
+
 void	ft_die(t_struct *p)
 {
 	long time;
@@ -64,7 +81,7 @@ void	ft_die(t_struct *p)
 		{
 			ft_message(TYPE_DIE, p);
 			//TODO:free les mallocs et tout la 
-			exit(1);	
+			exit(1);
 		}
 	}
 	time = ft_conv_to_ms(p->more->now, p->last_eat);
@@ -72,7 +89,6 @@ void	ft_die(t_struct *p)
 	{
 		ft_message(TYPE_DIE, p);
 		//TODO:free les mallocs et tout la 
-		exit(1);	
+		exit(1);
 	}
 }
-		

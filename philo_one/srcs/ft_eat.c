@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_eat.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
+/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 13:40:34 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/08 21:20:10 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 11:52:18 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,15 @@ void    ft_eat(t_struct *p)
 			//MANGE
     		ft_message(TYPE_EAT, p);
 			gettimeofday(&p->last_eat, NULL);
-    		usleep(p->t_eat * 1000);
+			my_sleep(p, p->t_eat);
+
+			if (p->nb_eat > -1)
+			{
+					p->more->repas++;
+				if (p->more->repas == p->nb_eat * p->nb_philo)
+					error(0, "");	
+			}
+				
 			//REND CES FOURCHETTES
     		p->fork = 0;
     		pthread_mutex_unlock(p->m_fork);
@@ -53,7 +61,8 @@ void    ft_eat(t_struct *p)
     		pthread_mutex_unlock(p->m_next_fork);
    		}
 		ft_message(TYPE_SLEEP, p);
-		usleep(p->t_sleep * 100);
+		my_sleep(p, p->t_sleep);
+		//usleep(p->t_sleep * 1000);
 		ft_die(p);
 		ft_message(TYPE_THINK, p);
 	}

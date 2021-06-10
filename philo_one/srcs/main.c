@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomasgrangeon <thomasgrangeon@student.    +#+  +:+       +#+        */
+/*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/08 21:43:11 by thomasgrang      ###   ########lyon.fr   */
+/*   Updated: 2021/06/10 11:03:42 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ int main(int ac, char **av)
     if (ac <= 1 || ac > 6 || check_arg(ac, av))
 		error(1, "wrong arguments\n");
     p = ft_init_arg(av);
+	p->more->repas = 0;
     gettimeofday(&p->more->begin, NULL);
     ft_create_thread(p);
 }
