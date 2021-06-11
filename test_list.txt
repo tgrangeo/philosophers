@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 ✓			leaks -atExit -- ./philo_one 1 50 200 200 ""a""
 ✓			leaks -atExit -- ./philo_one 1 50 200a 200
 ✓			leaks -atExit -- ./philo_one 1 50a 200 200

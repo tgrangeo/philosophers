@@ -6,18 +6,17 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 13:30:27 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 15:09:14 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo_one.h"
 
-void   error(int ret, char *str, t_struct *p)
+int   error(char *str, t_struct *p)
 {
     write(1, str, ft_strlen(str));
-	if (p != NULL)
-		ft_free(p);
-    exit(ret);
+	pthread_mutex_unlock(p->more->death);
+	return (1);
 }
 
 long    ft_conv_to_ms(struct timeval philo_time, struct timeval start_time)
@@ -54,7 +53,7 @@ int	check_arg(int ac, char **av)
 	return (0);
 }
 
-void	my_sleep(t_struct *p, int time)
+int	my_sleep(t_struct *p, int time)
 {
 
     struct timeval    now;
@@ -65,13 +64,15 @@ void	my_sleep(t_struct *p, int time)
     {
         usleep(50);
         gettimeofday(&now, NULL);
-         ft_die(p);
+        if  (ft_die(p))
+			return (1);
         if (ft_conv_to_ms(now, start) >= time)
             break ;
     }
+	return 0;
 }
 
-void	ft_die(t_struct *p)
+int	ft_die(t_struct *p)
 {
 	long time;
 
@@ -82,8 +83,10 @@ void	ft_die(t_struct *p)
 		if (ft_conv_to_ms(p->more->now, p->more->begin) > p->t_die)
 		{
 			ft_message(TYPE_DIE, p);
-			ft_free(p); 
-			exit(1);
+			//ft_free(p); 
+			pthread_mutex_unlock(p->more->death);
+			return (1);
+			//exit(1);
 		}
 	}
 	time = ft_conv_to_ms(p->more->now, p->last_eat);
@@ -91,7 +94,10 @@ void	ft_die(t_struct *p)
 	{
 		ft_message(TYPE_DIE, p);
 		pthread_mutex_lock(p->more->mutex_parole);
-		ft_free(p);
-		exit(1);
+		pthread_mutex_unlock(p->more->death);
+		return (1);
+		//ft_free(p);
+		//exit(1);
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 11:28:16 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 13:44:39 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 15:13:45 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ void    *ft_routine(void *p_data)
 int     ft_create_thread(t_struct *p)
 {
     int i;
-    pthread_t pid[p->nb_philo];
+    pthread_t pid;
 
     i = 0;
     while (i < p->nb_philo)
     {
-        pthread_create(&pid[i], NULL,ft_routine, (void *)&p[i]);
+        pthread_create(&pid, NULL,ft_routine, (void *)&p[i]);
         i++;
     }
-    i = 0;
-    while (i < p->nb_philo)
-    {
-        pthread_join(pid[i], NULL);
-        i++;
-    }
+	pthread_detach(pid);
+    //i = 0;
+    //while (i < p->nb_philo)
+    //{
+    //    pthread_join(pid[i], NULL);
+	//	dprintf(1, "yo garcon\n");
+    //    i++;
+    //}
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:42 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 11:38:07 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 15:09:27 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 typedef	struct s_mor
 {
+	pthread_mutex_t	*death;
+	
 	int *fork;
 	int size_fork;
 	int	repas;
@@ -55,15 +57,15 @@ typedef struct s_struct
 }				t_struct;
 
 long	ft_atoi(const char *str);
-void   	error(int ret, char *str, t_struct *p);
+int   	error(char *str, t_struct *p);
 int		ft_strlen(char *str);
 int     ft_create_thread(t_struct *philo);
-void	ft_eat(t_struct *p);
+int		ft_eat(t_struct *p);
 void    ft_message(int type, t_struct *p);
 long    ft_conv_to_ms(struct timeval philo_time, struct timeval start_time);
-void	ft_die(t_struct *p);
+int		ft_die(t_struct *p);
 int		check_arg(int ac, char **av);
-void	my_sleep(t_struct *p, int time);
+int		my_sleep(t_struct *p, int time);
 int		ft_free(t_struct *p);
 
 #endif

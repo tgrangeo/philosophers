@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:51:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 13:56:01 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 15:14:22 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,17 @@ int		ft_free(t_struct *p)
 	
 	i = 0;
 	(void)p;
-	//if (p->more->mutex_parole != NULL)
-	//	free(p->more->mutex_parole);
-	//while (i < p->nb_philo)
-	//{
-	//	printf("id				%d\n", i);
-	//	if (p[i].m_fork != NULL)
-	//		free(p[i].m_fork);
-	//	i++;
-	//}
-	//dprintf(1, "jsbfgiusbfifs    %p, %d\n", &p->m_fork, p->id);
-//
-	//dprintf(1, "jsbfgiusbfifs asdfasdfa   %p %p %d\n", &p,&p->more, p->id);
-	//if (p->more != NULL)
-	//	free(p->more);
-	//if (p != NULL)
-	//	free(p);
+	if (p->more->mutex_parole != NULL)
+		free(p->more->mutex_parole);
+	while (i < p->nb_philo)
+	{
+		if (p[i].m_fork != NULL)
+			free(p[i].m_fork);
+		i++;
+	}
+	if (p->more != NULL)
+		free(p->more);
+	if (p != NULL)
+		free(p);
 	return (0);
 }
