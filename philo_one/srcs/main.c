@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/10 11:03:42 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 13:59:54 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ t_struct      *ft_init_arg(char **av)
     t_mor      *more;
 
     i = 0;
-    nb_philo = ft_atoi(av[1]);
+	philo = NULL;
+	more = NULL;
+	nb_philo = ft_atoi(av[1]);
 	if (nb_philo == 0)
-		error(1, "not enough philo\n");
+		error(1, "not enough philo\n", NULL);
     more = malloc(sizeof(t_mor));
-    philo = malloc(sizeof(t_struct) * nb_philo);   
+    philo = malloc(sizeof(t_struct) * nb_philo);
     while (i < nb_philo)
     {
         philo[i].nb_philo = ft_atoi(av[1]);
@@ -75,7 +77,7 @@ t_struct      *ft_init_arg(char **av)
     ft_init_2(philo);
 	if (philo[i - 1].t_die < 11 || philo[i - 1].t_eat < 11 ||
 		philo[i - 1].t_sleep < 11)
-		error(1, "wrong arguments\n");
+		error(1, "wrong arguments\n", philo);
     return (philo);
 }
 
@@ -84,10 +86,13 @@ int main(int ac, char **av)
 {
     t_struct        *p;
     
+	p = NULL;
     if (ac <= 1 || ac > 6 || check_arg(ac, av))
-		error(1, "wrong arguments\n");
+		error(1, "wrong arguments\n", NULL);
     p = ft_init_arg(av);
 	p->more->repas = 0;
     gettimeofday(&p->more->begin, NULL);
     ft_create_thread(p);
+	
+	
 }

@@ -6,15 +6,17 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/10 10:45:05 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 13:30:27 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo_one.h"
 
-void   error(int ret, char *str)
+void   error(int ret, char *str, t_struct *p)
 {
     write(1, str, ft_strlen(str));
+	if (p != NULL)
+		ft_free(p);
     exit(ret);
 }
 
@@ -80,7 +82,7 @@ void	ft_die(t_struct *p)
 		if (ft_conv_to_ms(p->more->now, p->more->begin) > p->t_die)
 		{
 			ft_message(TYPE_DIE, p);
-			//TODO:free les mallocs et tout la 
+			ft_free(p); 
 			exit(1);
 		}
 	}
@@ -88,7 +90,8 @@ void	ft_die(t_struct *p)
 	if (time > p->t_die)
 	{
 		ft_message(TYPE_DIE, p);
-		//TODO:free les mallocs et tout la 
+		pthread_mutex_lock(p->more->mutex_parole);
+		ft_free(p);
 		exit(1);
 	}
 }

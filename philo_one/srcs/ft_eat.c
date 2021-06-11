@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 13:40:34 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/10 11:52:18 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/11 11:38:40 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ void    ft_eat(t_struct *p)
 
 			if (p->nb_eat > -1)
 			{
-					p->more->repas++;
+				p->more->repas++;
 				if (p->more->repas == p->nb_eat * p->nb_philo)
-					error(0, "");	
+					error(0, "", p);	
 			}
 				
 			//REND CES FOURCHETTES
@@ -62,15 +62,7 @@ void    ft_eat(t_struct *p)
    		}
 		ft_message(TYPE_SLEEP, p);
 		my_sleep(p, p->t_sleep);
-		//usleep(p->t_sleep * 1000);
 		ft_die(p);
 		ft_message(TYPE_THINK, p);
 	}
-}
-
-void    ft_sleep(t_struct *p)
-{
-    ft_message(TYPE_SLEEP, p);
-    usleep(p->t_sleep * 100);
-	//ft_die(p);
 }
