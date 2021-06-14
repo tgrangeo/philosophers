@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 10:46:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 15:09:14 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 14:18:26 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int   error(char *str, t_struct *p)
 {
     write(1, str, ft_strlen(str));
 	pthread_mutex_unlock(p->more->death);
+	ft_free(p);
 	return (1);
 }
 
@@ -76,28 +77,25 @@ int	ft_die(t_struct *p)
 {
 	long time;
 
-	gettimeofday(&p->more->now, NULL);
 	while (p->nb_philo == 1)
 	{
 		gettimeofday(&p->more->now, NULL);
 		if (ft_conv_to_ms(p->more->now, p->more->begin) > p->t_die)
 		{
 			ft_message(TYPE_DIE, p);
-			//ft_free(p); 
 			pthread_mutex_unlock(p->more->death);
 			return (1);
-			//exit(1);
 		}
 	}
+	gettimeofday(&p->more->now, NULL);
 	time = ft_conv_to_ms(p->more->now, p->last_eat);
 	if (time > p->t_die)
 	{
+		//dprintf(1, "						%d time = %ld %d\n", p->id,time, p->t_die);
 		ft_message(TYPE_DIE, p);
 		pthread_mutex_lock(p->more->mutex_parole);
 		pthread_mutex_unlock(p->more->death);
 		return (1);
-		//ft_free(p);
-		//exit(1);
 	}
 	return (0);
 }

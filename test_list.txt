@@ -1,26 +1,26 @@
 
+V			leaks -atExit -- ./philo_one 1 50 200 200 ""a""
+V			leaks -atExit -- ./philo_one 1 50 200a 200
+V			leaks -atExit -- ./philo_one 1 50a 200 200
+V			leaks -atExit -- ./philo_one "1a" 50 200 200
+V			leaks -atExit -- ./philo_one 0 200 200 200
+V			leaks -atExit -- ./philo_one 1 400 200 200
+V			leaks -atExit -- ./philo_one 1 200 200 200
+V			leaks -atExit -- ./philo_one 2 410 200 200
+V			leaks -atExit -- ./philo_one 4 410 200 200
+V			leaks -atExit -- ./philo_one 4 410 200 000
+V			leaks -atExit -- ./philo_one 4 310 200 100
+V			leaks -atExit -- ./philo_one 4 399 200 200 10
+V			leaks -atExit -- ./philo_one 4 400 200 200 10
+V			leaks -atExit -- ./philo_one 4 310 200 200 10
+V			leaks -atExit -- ./philo_one 4 310 200 100 2
+V			leaks -atExit -- ./philo_one 4 310 200 100 1
+V			leaks -atExit -- ./philo_one 5 800 200 200
+V			leaks -atExit -- ./philo_one 5 310 200 100 0
+V			leaks -atExit -- ./philo_one 5 310 200 100 1
+V			leaks -atExit -- ./philo_one 5 800 200 200 7
+V			leaks -atExit -- ./philo_one 5 800 2000 200
 
-✓			leaks -atExit -- ./philo_one 1 50 200 200 ""a""
-✓			leaks -atExit -- ./philo_one 1 50 200a 200
-✓			leaks -atExit -- ./philo_one 1 50a 200 200
-✓			leaks -atExit -- ./philo_one "1a" 50 200 200
-✓			leaks -atExit -- ./philo_one 0 200 200 200
-✓			leaks -atExit -- ./philo_one 1 400 200 200
-✓			leaks -atExit -- ./philo_one 1 200 200 200
-✓			leaks -atExit -- ./philo_one 2 410 200 200
-✓			leaks -atExit -- ./philo_one 4 410 200 200
-✓			leaks -atExit -- ./philo_one 4 410 200 000
-✓			leaks -atExit -- ./philo_one 4 310 200 100
-✓			leaks -atExit -- ./philo_one 4 399 200 200 10
-✓			leaks -atExit -- ./philo_one 4 400 200 200 10
-✓			leaks -atExit -- ./philo_one 4 310 200 200 10
-✓			leaks -atExit -- ./philo_one 4 310 200 100 2
-X			leaks -atExit -- ./philo_one 4 310 200 100 1
-X			leaks -atExit -- ./philo_one 5 800 200 200
-X			leaks -atExit -- ./philo_one 5 310 200 100 0
-X			leaks -atExit -- ./philo_one 5 310 200 100 1
-X			leaks -atExit -- ./philo_one 5 800 200 200 7
-X			leaks -atExit -- ./philo_one 5 600 200 200
-X			leaks -atExit -- ./philo_one 5 800 2000 200
 X			leaks -atExit -- ./philo_one 200 800 200 200
 X			leaks -atExit -- ./philo_one 200 6000 200 200
+X			leaks -atExit -- ./philo_one 5 600 200 200

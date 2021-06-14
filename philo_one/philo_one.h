@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:42 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 15:09:27 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 14:12:22 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,17 @@
 # define TYPE_SLEEP 2
 # define TYPE_THINK 3
 # define TYPE_FORK 4
-# define TYPE_FORK_2 5
-# define TYPE_END_EAT 6
 
 typedef	struct s_mor
 {
-	pthread_mutex_t	*death;
-	
 	int *fork;
 	int size_fork;
 	int	repas;
-	pthread_mutex_t *mutex_parole;
 	struct timeval begin;
 	struct timeval now;
+	pthread_mutex_t	*death;
+	pthread_mutex_t *mutex_parole;
+	pthread_mutex_t *m_fork;
 }				t_mor;
 
 typedef struct s_struct
@@ -51,8 +49,6 @@ typedef struct s_struct
 	int fork;
 	int *next_fork;
 	struct timeval last_eat;
-	pthread_mutex_t *m_fork;
-	pthread_mutex_t *m_next_fork;
 	t_mor	*more;
 }				t_struct;
 

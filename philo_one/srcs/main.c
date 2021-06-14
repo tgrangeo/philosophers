@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:23:03 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 15:13:20 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 14:10:02 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ static int ft_init_2(t_struct *p)
 	i = 0;
     p->more->mutex_parole = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
     pthread_mutex_init(p->more->mutex_parole, NULL);
-    while (i < p->nb_philo)
-    {
-        p[i].m_fork= (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-        pthread_mutex_init(p[i].m_fork, NULL);
-        i++;
-    }
-    i = 0;
-    while (i < p->nb_philo - 1)
-    {
-        p[i].m_next_fork = p[i + 1].m_fork;
-        i++;
-    }
-    p[p->nb_philo - 1].m_next_fork = p[0].m_fork;
+    p->more->m_fork= (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+    pthread_mutex_init(p->more->m_fork, NULL);
+    //while (i < p->nb_philo)
+    //{
+    //    i++;
+    //}
+    //i = 0;
+    //while (i < p->nb_philo - 1)
+    //{
+    //    p[i].m_next_fork = p[i + 1].m_fork;
+    //    i++;
+    //}
+    //p[p->nb_philo - 1].m_next_fork = p[0].m_fork;
 	int y = 0;
 	while (y < p->nb_philo - 1)
 	{
@@ -60,9 +60,11 @@ t_struct      *ft_init_arg(char **av)
 	philo = NULL;
 	more = NULL;
 	nb_philo = ft_atoi(av[1]);
-	if (nb_philo == 0)
-		if (error("not enough philo\n", NULL))
-			return(NULL);
+	if (nb_philo == 0 || (av[5] != NULL && ft_atoi(av[5]) == 0))
+	{
+		write(1, "wrong arguments\n", 16);
+		return(NULL);
+	}
     more = malloc(sizeof(t_mor));
     philo = malloc(sizeof(t_struct) * nb_philo);
     while (i < nb_philo)
@@ -82,8 +84,8 @@ t_struct      *ft_init_arg(char **av)
     ft_init_2(philo);
 	if (philo[i - 1].t_die < 11 || philo[i - 1].t_eat < 11 ||
 		philo[i - 1].t_sleep < 11)
-		if(error("wrong arguments\n", philo))
-			return (NULL);
+			if(error("wrong arguments\n", philo))
+				return (NULL);
     return (philo);
 }
 
@@ -95,17 +97,18 @@ int main(int ac, char **av)
 	p = NULL;
     if (ac <= 1 || ac > 6 || check_arg(ac, av))
 	{
-		error("wrong arguments\n", NULL);
+		write(1, "wrong arguments\n", 16);
 		return (1);
 	}
     p = ft_init_arg(av);
 	if (p == NULL)
-		return 1;
+		return (1);
 	p->more->repas = 0;
     gettimeofday(&p->more->begin, NULL);
     ft_create_thread(p);
 	
 	pthread_mutex_lock(p->more->death);
-	//TODO: ft_free(p);
+	if (p != NULL)
+		ft_free(p);
 	return (0);
 }

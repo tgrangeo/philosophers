@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 11:28:16 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 15:13:45 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 13:16:47 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int     ft_create_thread(t_struct *p)
     while (i < p->nb_philo)
     {
         pthread_create(&pid, NULL,ft_routine, (void *)&p[i]);
+		usleep(50);
         i++;
     }
 	pthread_detach(pid);

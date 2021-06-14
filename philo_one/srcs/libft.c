@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:51:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/11 15:14:22 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/14 14:11:38 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,17 @@ int		ft_free(t_struct *p)
 	int i;
 	
 	i = 0;
-	(void)p;
 	if (p->more->mutex_parole != NULL)
 		free(p->more->mutex_parole);
-	while (i < p->nb_philo)
-	{
-		if (p[i].m_fork != NULL)
-			free(p[i].m_fork);
-		i++;
-	}
+	if (p->more->m_fork != NULL)
+		free(p->more->m_fork);
 	if (p->more != NULL)
 		free(p->more);
+	if (p->more->death != NULL)
+	{
+		pthread_mutex_unlock(p->more->death);
+		free(p->more->death);
+	}
 	if (p != NULL)
 		free(p);
 	return (0);
