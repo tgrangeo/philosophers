@@ -6,7 +6,7 @@
 /*   By: tgrangeo <tgrangeo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 11:51:33 by tgrangeo          #+#    #+#             */
-/*   Updated: 2021/06/14 14:11:38 by tgrangeo         ###   ########lyon.fr   */
+/*   Updated: 2021/06/15 13:41:51 by tgrangeo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	ft_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 		i++;
 	return (i);
 }
@@ -50,22 +50,22 @@ long	ft_atoi(const char *str)
 	return (nb * signe);
 }
 
-int		ft_free(t_struct *p)
+int	ft_free(t_struct *p)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (p->more->mutex_parole != NULL)
 		free(p->more->mutex_parole);
 	if (p->more->m_fork != NULL)
 		free(p->more->m_fork);
-	if (p->more != NULL)
-		free(p->more);
 	if (p->more->death != NULL)
 	{
 		pthread_mutex_unlock(p->more->death);
 		free(p->more->death);
 	}
+	if (p->more != NULL)
+		free(p->more);
 	if (p != NULL)
 		free(p);
 	return (0);
